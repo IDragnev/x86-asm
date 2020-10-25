@@ -7,27 +7,31 @@
 # %rax - the current item
 
 # Memory locations:
-# data_items - the array, terminated by 0
+# array - the array of integers
+# array_size - the size of the array
 
 .section .data
 
-data_items:
-.8byte 3,67,34,222,45,75,54,34,44,33,121,12,0
+array_size:
+.8byte 5
+
+array:
+.8byte 3,67,34,222,45,250,251
 
 .section .text
 
 .globl _start
 _start:
 movq $0, %rdi                      # index = 0
-movq data_items(,%rdi,8), %rax     # current = data_items[8*0]
+movq array(,%rdi,8), %rax          # current = array[8*0]
 movq %rax, %rbx                    # max = current
 
 loop_start:
-cmpq $0, %rax                      # break if array end was reached
-je loop_exit
+cmpq array_size, %rdi              # break if index >= size
+jge loop_exit
 
+movq array(,%rdi, 8), %rax         # current = array[8 * index]
 incq %rdi                          # index += 1
-movq data_items(,%rdi, 8), %rax    # current = data_items[8 * index]
 cmpq %rbx, %rax                    # if current <= max proceed with next item
 jle loop_start
 
