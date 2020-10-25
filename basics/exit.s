@@ -6,7 +6,7 @@
 .section .text
 .globl _start
 _start:
-movl $1, %eax    # the exit syscall number
-movl $0, %ebx    # the exit code of the program
+movq $1, %rax    # the exit syscall number
+movq $0, %rbx    # the exit code of the program
 
 int $0x80        # generate a software interrupt
