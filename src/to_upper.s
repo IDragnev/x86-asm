@@ -12,10 +12,9 @@
 # 3 - failed to open output file for writing
 #
 
-.section .data
+.include "x64-linux-def.s"
 
-.equ STDIN, 0
-.equ STDOUT, 1
+.section .data
 
 # expected args = [prog_name (implicit), in_file, out_file]
 .equ ARGS_CNT, 3
@@ -26,13 +25,6 @@
 .equ ERR_NUM_ARGS, 1
 .equ ERR_OPEN_IN, 2
 .equ ERR_OPEN_OUT, 3
-
-# syscall numbers
-.equ SYS_READ, 0
-.equ SYS_WRITE, 1
-.equ SYS_OPEN, 2
-.equ SYS_CLOSE, 3
-.equ SYS_EXIT, 60
 
 # flags for the open syscall
 .equ O_RDONLY, 0
