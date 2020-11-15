@@ -25,9 +25,6 @@
 #
 .type max, @function
 max:
-    pushq %rbp                  # save caller's BP
-    movq %rsp, %rbp             # BP --> [caller's BP]
-
     movq $0, %rax               # max = 0
     cmpq $0, %rdi               # if array_start is null, we are done
     je max_exit
@@ -48,5 +45,4 @@ max_loop_start:
     jmp max_loop_start
 
 max_exit:
-    leave
     ret

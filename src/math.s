@@ -18,9 +18,6 @@
 #
 .type factorial, @function
 factorial:
-    pushq %rbp            # save caller's BP
-    movq %rsp, %rbp       # BP --> [caller's BP]
-
     movq $1, %rax         # result = 1
 
 fact_loop_start:
@@ -32,7 +29,6 @@ fact_loop_start:
     jmp fact_loop_start
 
 end_factorial:
-    leave
     ret
 
 #
@@ -46,9 +42,6 @@ end_factorial:
 #
 .type rfactorial, @function
 rfactorial:
-    pushq %rbp            # save caller's BP
-    movq %rsp, %rbp       # BP --> [caller's BP]
-
     movq $1, %rax         # result = 1
     cmpq $1, %rdi         # if n <= 1, we are done
     jle rfact_end
@@ -60,7 +53,6 @@ rfactorial:
     mulq %rdi             # result *= n
 
 rfact_end:
-    leave
     ret
 
 #
@@ -75,9 +67,6 @@ rfact_end:
 #
 .type power, @function
 power:
-    pushq %rbp             # save caller BP
-    movq %rsp, %rbp        # BP --> [caller BP]
-
     movq $1, %rax          # result = 1
     cmpq $0, %rsi          # if power == 0, we are done
     je end_power
@@ -93,5 +82,4 @@ power_loop_start:
     jmp power_loop_start
 
 end_power:
-    leave
     ret

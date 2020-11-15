@@ -151,9 +151,6 @@ exit:
 .equ UPPER_CONVERSION, ('A' - 'a')
 
 to_upper:
-    pushq %rbp                    # save caller's BP
-    movq %rsp, %rbp               # BP --> [caller's BP]
-
     movq $0, %r11                 # index = 0
 
 to_upper_loop_start:
@@ -176,5 +173,4 @@ convert_next_byte:
 
 to_upper_loop_end:
     movq %rsi, %rax
-    leave
     ret
